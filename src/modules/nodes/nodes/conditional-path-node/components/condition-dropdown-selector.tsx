@@ -9,6 +9,7 @@ const conditionList = [
     { id: nanoid(), condition: "User visited a page" },
     { id: nanoid(), condition: "User clicked a button" },
     { id: nanoid(), condition: "User submitted a form data" },
+    { id: nanoid(), condition: "El usuario dice que ss" },
 ];
 
 type ConditionDropdownSelectorProps = Readonly<{

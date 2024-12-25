@@ -14,7 +14,7 @@ export function getNodeDetail(nodeType: BuilderNodeType | string | undefined) {
 
 export function createNodeData<T extends BuilderNodeType>(type: T, data: any) {
     return {
-        id: nanoid(),
+        id: data.id || nanoid(),
         type,
         data,
     };

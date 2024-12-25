@@ -1,5 +1,7 @@
+import { useReactFlow } from "@xyflow/react";
 import { toast } from "sonner";
 
+import { saveNodesAsync } from "~/externalServices/nodes-external-services";
 import { useFlowValidator } from "~/modules/flow-builder/hooks/use-flow-validator";
 import { SocialButtonLink } from "~/modules/navigation-bar/components/social-button-link";
 import { useApplicationState } from "~/stores/application-state";
@@ -19,6 +21,16 @@ export function NavigationBarModule() {
             toast.error("Flow is invalid", { description: "Please check if the flow is complete and has no lone nodes" });
     });
 
+    const { getNodes, getEdges } = useReactFlow();
+    const handleSaveFlow = async () => {
+        const nodes = getNodes();
+        const edges = getEdges();
+
+        console.log(nodes, edges);
+        saveNodesAsync({ nodes, edges });
+        toast.success("Flow saved successfully", { description: "Your flow has been saved", dismissible: true });
+    };
+
     return (
         <div className="relative shrink-0 bg-dark-700 px-1.5 py-2">
             <div className="absolute inset-0">
@@ -29,17 +41,17 @@ export function NavigationBarModule() {
                 <div className="flex items-center py-0.5 pl-2">
                     <div className="size-8 flex shrink-0 select-none items-center justify-center rounded-lg bg-teal-600 text-sm font-bold leading-none">
                         <span className="translate-y-px">
-                            DS
+                            JA
                         </span>
                     </div>
 
                     <div className="ml-3 h-full flex flex-col select-none justify-center gap-y-1 leading-none">
                         <div className="text-sm font-medium leading-none <md:(text-xs)">
-                            Chatbot Flow Builder - BiteSpeed Frontend Task
+                            V1 Chatbot Flow Builder
                         </div>
 
                         <div className="text-xs text-light-50/60 leading-none">
-                            By Denish Sharma
+                            Juan Avila
                         </div>
                     </div>
                 </div>
@@ -67,9 +79,20 @@ export function NavigationBarModule() {
                             </span>
                         </button>
 
+                        <button
+                            type="button"
+                            className="h-full flex items-center justify-center gap-x-2 border border-dark-300 rounded-lg bg-dark-300/50 px-3 text-sm outline-none transition active:(bg-dark-400) hover:(bg-dark-200)"
+                            onClick={handleSaveFlow}
+                        >
+                            <div className="i-mynaui:save size-5" />
+                            <span className="pr-0.5">
+                                Save Flow
+                            </span>
+                        </button>
+
                         <div className="h-4 w-px bg-dark-300" />
 
-                        <div className="flex items-stretch gap-x-0.5">
+                        {/* <div className="flex items-stretch gap-x-0.5">
                             <SocialButtonLink
                                 onClick={() => trackSocialLinkClick("linkedin")}
                                 href="https://www.linkedin.com/in/denishsharma/"
@@ -83,7 +106,7 @@ export function NavigationBarModule() {
                             >
                                 <div className="i-mynaui:brand-github size-4.5" />
                             </SocialButtonLink>
-                        </div>
+                        </div> */}
                     </div>
                 </Whenever>
             </div>

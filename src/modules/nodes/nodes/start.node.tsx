@@ -50,7 +50,7 @@ export const metadata: RegisterNodeMetadata<StartNodeData> = {
     node: memo(StartNode),
     detail: {
         icon: "i-mynaui:play",
-        title: "Start",
+        title: "Trigger",
         description: "Start the chatbot flow",
     },
     connection: {
@@ -59,7 +59,7 @@ export const metadata: RegisterNodeMetadata<StartNodeData> = {
     },
     available: false,
     defaultData: {
-        label: "Start",
+        label: "Trigger",
         deletable: false,
     },
 };
